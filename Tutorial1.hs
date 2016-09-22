@@ -73,7 +73,7 @@ _ = runReader0 2 rlExp
 
 data Comp req a where
   Val :: a   -> Comp req a
-  E   :: _1 -> (_2 -> Comp req a) -> Comp req a
+  E   :: req b -> (b -> Comp req a) -> Comp req a
 
 -- Effect signature
 data Get x where
