@@ -194,7 +194,6 @@ runReaderC e (E r k) = case decomp r of
   Right Get -> runReaderC e $ k e
   Left r    -> E r (runReaderC e . k)
 
-{-
 rwExpC = do
   injC $ tell "begin"
   x <- injC $ rlExp3
@@ -211,7 +210,12 @@ xx = runReaderC (2::Int) rwExpC
 -- Handling two effects at the same time
 
 runState :: e -> Comp (Union (Get e ': Put e ': r)) a -> Comp (Union r) a
-
+runState e (Val x) = Val x
+runState e (E r k) = case decomp r of
+  Right Get -> runState e $ k e
+  Left r    -> case decomp r of
+    Right (Put e) -> runState e $ k ()
+    Left r        -> E r (runState e . k)
 
 ts11 = do
   injC $ tell (10 ::Int)
@@ -226,7 +230,7 @@ x2 = (runState (0::Int) ts11)
 
 -- What now?
 
-
+{-
 ts21 = do
   injC $ tell (10::Int)
   x <- injC ask
