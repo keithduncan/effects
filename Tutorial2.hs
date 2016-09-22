@@ -190,7 +190,7 @@ xx = runReaderC (2::Int) rwExpC
 runState :: e -> Comp (Union (Get e ': Put e ': r)) a -> Comp (Union r) a
 
 
-ts11 = do 
+ts11 = do
   injC $ tell (10 ::Int)
   x <- injC ask
   return (x::Int)
@@ -204,11 +204,11 @@ x2 = (runState (0::Int) ts11)
 -- What now?
 
 
-ts21 = do 
+ts21 = do
   injC $ tell (10::Int)
   x <- injC ask
   injC $ tell (20::Int)
   y <- injC ask
-  return (x+y) 
+  return (x+y)
 
 -}
