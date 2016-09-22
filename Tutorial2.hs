@@ -18,6 +18,9 @@ data Comp req a where
 
 -- Effect signature
 
+data Get e x where
+  Get :: Get e e
+
 ask :: Comp (Get e) e
 ask = E Get Val
 
