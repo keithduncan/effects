@@ -25,7 +25,7 @@ class ReaderLang d where
   ask :: d
 
 -- Sample expression
-rlExp = add ask (add ask (int 1))
+rlExp = add (int 1) (add ask ask)
 
 
 
