@@ -153,7 +153,7 @@ runReaderL e (Val x) = return x
 runReaderL e (E (L Get) k) = runReaderL e $ k e
 runReaderL e (E (R r) k) = E r (runReaderL e . k)
 
-_ = runReaderL 2 rwExp
+_ = (runWriter . runReaderL 2) rwExp
 
 {-
 -- Interpreter composition
