@@ -155,7 +155,7 @@ runReaderL e (E (R r) k) = E r (runReaderL e . k)
 
 _ = (runWriter . runReaderL 2) rwExp
 
-{-
+
 -- Interpreter composition
 
 
@@ -187,9 +187,14 @@ injC :: Member req r => Comp req x -> Comp (Union r) x
 injC (Val x) = Val x
 injC (E r k)  = E (inj r) (injC . k)
 
+
 runReaderC :: e -> Comp (Union (Get e ': r)) a -> Comp (Union r) a
+runReaderC e (Val x) = Val x
+runReaderC e (E r k) = case decomp r of
+  Right Get -> runReaderC e $ k e
+  Left r    -> E r (runReaderC e . k)
 
-
+{-
 rwExpC = do
   injC $ tell "begin"
   x <- injC $ rlExp3
