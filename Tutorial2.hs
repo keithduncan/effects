@@ -228,6 +228,9 @@ ts11 = do
 
 x2 = (runState (0::Int) ts11)
 
+run :: Comp (Union '[]) a -> a
+run (Val x) = x
+
 -- What now?
 
 {-
