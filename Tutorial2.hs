@@ -145,12 +145,17 @@ rwExp = do
   injR $ tell "end"
   return x
 
-{-
 -- How to interpret? Need projections
 -- runReaderL
 
+runReaderL :: e -> Comp (Sum (Get e) r2) a -> Comp r2 a
+runReaderL e (Val x) = return x
+runReaderL e (E (L Get) k) = runReaderL e $ k e
+runReaderL e (E (R r) k) = E r (runReaderL e . k)
+
 _ = runReaderL 2 rwExp
 
+{-
 -- Interpreter composition
 
 
