@@ -81,7 +81,6 @@ feedAll (h : t) (E Get k)   = feedAll t (k h)
 _ = feedAll [2,3,4] rlExp3 :: Maybe Int
 
 
-{-
 -- Another effect, Put
 
 data Put o x where
@@ -104,7 +103,7 @@ runWriter :: Comp (Put o) x -> ([o],x)
 
 _ = runWriter (wrExp (return 1))
 
-
+{-
 -- QUIZ: What other Writer interpreters to write?
 
 
