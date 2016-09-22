@@ -87,7 +87,6 @@ instance ReaderLang (Comp Get Int) where
   add (E r k)   y      = E r (\x -> add (k x) y)
   add x       (E r k)  = E r (\y -> add x (k y))
 
-{-
 -- How to extend to other types of env?
 
 runReader :: Int -> Comp Get a -> a
@@ -96,6 +95,7 @@ runReader e (E Get k) = runReader e $ k e
 
 _ = runReader 2 rlExp :: Int
 
+{-
 -- If we need subtraction, should we write the last two clauses
 -- over again?
 -- Generalizing even more
