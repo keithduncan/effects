@@ -29,7 +29,6 @@ bind :: Comp req a -> (a -> Comp req b) -> Comp req b
 bind (Val x) f = f x
 bind (E r k) f = E r (\x -> bind (k x) f)
 
-{-
 -- More convenient notation
 -- rlExp2 =
 --   bind ask $ \x ->
@@ -57,7 +56,7 @@ rlExp3 = do
 
 _ = runReader 2 rlExp3 :: Int
 
-
+{-
 -- ** Monad, or Freer Monad!
 -- (a less optimal instance thereof)
 
