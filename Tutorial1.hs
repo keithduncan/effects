@@ -71,7 +71,6 @@ _ = runReader0 2 rlExp
 
 -- Again, p7
 
-{-
 data Comp req a where
   Val :: a   -> Comp req a
   E   :: _1 -> (_2 -> Comp req a) -> Comp req a
@@ -88,6 +87,7 @@ instance ReaderLang (Comp Get Int) where
   add (E r k)   y      = E r (\x -> add (k x) y)
   add x       (E r k)  = E r (\y -> add x (k y))
 
+{-
 -- How to extend to other types of env?
 
 runReader :: Int -> Comp Get a -> a
