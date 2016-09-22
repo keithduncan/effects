@@ -95,7 +95,7 @@ runReader e (E Get k) = runReader e $ k e
 
 _ = runReader 2 rlExp :: Int
 
-{-
+
 -- If we need subtraction, should we write the last two clauses
 -- over again?
 -- Generalizing even more
@@ -109,7 +109,7 @@ bind :: Comp req a -> (a -> Comp req b) -> Comp req b
 bind (Val x) f = f x
 bind (E r k) f = E r (\x -> bind (k x) f)
 
-
+{-
 -- We can easily write even richer Reader languages, uniformly
 
 rlExp2 =
