@@ -107,7 +107,6 @@ runWriter (E (Put x) k) =
 
 _ = runWriter (wrExp (return 1))
 
-{-
 -- QUIZ: What other Writer interpreters to write?
 
 
@@ -121,9 +120,8 @@ rwExp' = do
   return x
 -}
 
-
-
 -- rxExp0' x = if x then rlExp3 else (do {tell "1"; return (0::Int)})
+
 
 -- Internal choice!
 
@@ -147,6 +145,7 @@ rwExp = do
   injR $ tell "end"
   return x
 
+{-
 -- How to interpret? Need projections
 -- runReaderL
 
