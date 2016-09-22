@@ -233,12 +233,11 @@ run (Val x) = x
 
 -- What now?
 
-{-
 ts21 = do
   injC $ tell (10::Int)
   x <- injC ask
   injC $ tell (20::Int)
   y <- injC ask
-  return (x+y)
+  return ((x+y)::Int)
 
--}
+x3 = runState (0::Int) ts21
