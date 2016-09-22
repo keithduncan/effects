@@ -18,7 +18,6 @@ data Comp req a where
 
 -- Effect signature
 
-{-
 ask :: Comp (Get e) e
 ask = E Get Val
 
@@ -30,6 +29,7 @@ bind :: Comp req a -> (a -> Comp req b) -> Comp req b
 bind (Val x) f = f x
 bind (E r k) f = E r (\x -> bind (k x) f)
 
+{-
 -- More convenient notation
 -- rlExp2 =
 --   bind ask $ \x ->
