@@ -109,7 +109,7 @@ bind :: Comp req a -> (a -> Comp req b) -> Comp req b
 bind (Val x) f = f x
 bind (E r k) f = E r (\x -> bind (k x) f)
 
-{-
+
 -- We can easily write even richer Reader languages, uniformly
 
 rlExp2 =
@@ -125,5 +125,3 @@ rlExp3 =
   Val (x * y - 1)
 
 _ = runReader 2 rlExp3 :: Int
-
--}
