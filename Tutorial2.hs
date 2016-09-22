@@ -99,7 +99,11 @@ wrExp m = do
   tell "end"
 
 
-runWriter :: Comp (Put o) x -> ([o],x)
+runWriter :: Comp (Put o) x -> ([o], x)
+runWriter (Val x) = ([], x)
+runWriter (E (Put x) k) =
+  let (l, v) = runWriter $ k () in
+  (x:l, v)
 
 _ = runWriter (wrExp (return 1))
 
