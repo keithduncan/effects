@@ -67,7 +67,7 @@ rlExp3 = do
 
 _ = runReader 2 rlExp3 :: Int
 
-{-
+
 -- ** Monad, or Freer Monad!
 -- (a less optimal instance thereof)
 
@@ -81,6 +81,7 @@ feedAll (h : t) (E Get k)   = feedAll t (k h)
 _ = feedAll [2,3,4] rlExp3 :: Maybe Int
 
 
+{-
 -- Another effect, Put
 
 data Put o x where
