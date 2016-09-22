@@ -40,12 +40,20 @@ bind (E r k) f = E r (\x -> bind (k x) f)
 
 -- renaming Val and bind, so to get the benefit of the do notation
 
+instance Functor (Comp req) where
+  -- fmap :: (a -> b) -> Comp req a -> Comp req b
+  fmap f (Val x) = Val (f x)
+  fmap f (E r k) = E r (\x -> fmap f (k x))
+
+instance Applicative (Comp req) where
+  pure  = Val
+  f <*> E r k = E r (\x -> f <*> k x)
+
 instance Monad (Comp req) where
   return = Val
   (>>=)  = bind
 
 -- Simpler composition modes
-
 
 rlExp2 = do
   x <- ask
